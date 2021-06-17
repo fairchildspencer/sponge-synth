@@ -139,16 +139,18 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         buffer.clear (i, 0, buffer.getNumSamples());
     
     for (int i = 0; i < synth.getNumVoices(); i++) {
-        if (auto voice = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i))) {
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
             //oscillator controls
-            //adsr
             //lfo
+            
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+            
+            voice->updateADSR(attack, decay, sustain, release); //Update params with current value tree state
         }
     }
-    
-    for (const juce::MidiMessageMetadata metadata : midiMessages)
-            if (metadata.numBytes == 3)
-                juce::Logger::writeToLog (juce::String(metadata.getMessage().getTimeStamp()));
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }
