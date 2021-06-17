@@ -4,6 +4,7 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 #include "UI/AdsrUI.h"
+#include "UI/OscillatorUI.h"
 
 //==============================================================================
 /**
@@ -20,10 +21,8 @@ public:
 
 private:
     SpongeSynthAudioProcessor& audioProcessor;
+    OscillatorUI osc;
     AdsrUI adsr;
-    
-    juce::ComboBox oscSelector;
-    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscSelectAttachment;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SpongeSynthAudioProcessorEditor)
 };

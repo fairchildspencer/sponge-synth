@@ -118,7 +118,6 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
-            //oscillator controls
             //lfo
             
             auto& attack = *apvts.getRawParameterValue("ATTACK");
@@ -126,7 +125,10 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
             auto& release = *apvts.getRawParameterValue("RELEASE");
             
+            auto& oscWave = *apvts.getRawParameterValue("OSC");
+            
             voice->updateParameters(attack, decay, sustain, release); //Update params with current value tree state
+            voice->getOscillator().setWaveType(oscWave);
         }
     }
 
