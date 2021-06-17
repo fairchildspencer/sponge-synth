@@ -145,6 +145,10 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             //lfo
         }
     }
+    
+    for (const juce::MidiMessageMetadata metadata : midiMessages)
+            if (metadata.numBytes == 3)
+                juce::Logger::writeToLog (juce::String(metadata.getMessage().getTimeStamp()));
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
 }

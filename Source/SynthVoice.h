@@ -26,6 +26,7 @@ public:
 private:
     juce::dsp::Oscillator<float> osc { [](float x) { return std::sin(x); }}; //sine wave
     juce::dsp::Gain<float> gain;
+    juce::AudioBuffer<float> synthBuffer;
     
     juce::ADSR adsr;
     juce::ADSR::Parameters adsrParams;
