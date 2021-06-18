@@ -37,7 +37,7 @@ void AdsrUI::resized() {
     const auto bounds = getLocalBounds().reduced(10);
     const auto padding = 10;
     const auto sliderWidth = (bounds.getWidth() / 4) - padding;
-    const auto sliderHeight = bounds.getHeight();
+    const auto sliderHeight = bounds.getHeight() - padding;
     const auto sliderStartX = 0;
     const auto sliderStartY = 0;
     

@@ -20,6 +20,6 @@ void SpongeSynthAudioProcessorEditor::paint (juce::Graphics& g) {
 }
 
 void SpongeSynthAudioProcessorEditor::resized() {
-    osc.setBounds(10, 10, 100, 30);
+    osc.setBounds(10, 10, getWidth() / 2 - 10, getHeight());
     adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
 }
