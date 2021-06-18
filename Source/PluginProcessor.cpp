@@ -127,8 +127,12 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             
             auto& oscWave = *apvts.getRawParameterValue("OSC");
             
-            voice->updateParameters(attack, decay, sustain, release); //Update params with current value tree state
+            auto& fmDepth = *apvts.getRawParameterValue("FMDEPTH");
+            auto& fmFrequency = *apvts.getRawParameterValue("FMFREQUENCY");
+            
             voice->getOscillator().setWaveType(oscWave);
+            voice->getOscillator().setFMParams(fmDepth, fmFrequency);
+            voice->updateParameters(attack, decay, sustain, release); //Update params with current value tree state
         }
     }
 
@@ -164,6 +168,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     
     //ComboBox -Switch Oscillators
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray {"Sine","Saw","Square"}, 0));
+    
+    //FM - Frequency and Depth of Wave
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMFREQUENCY", "FmFrequency", juce::NormalisableRange<float> { 0.0f, 1000.0f, }, 5.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMDEPTH", "FmDepth", juce::NormalisableRange<float> { 0.0f, 1000.0f, }, 500.0f));
+    
     //Attack -float
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
     //Decay -float
