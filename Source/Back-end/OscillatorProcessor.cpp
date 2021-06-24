@@ -53,5 +53,6 @@ void OscillatorProcessor::setFMParams (const float depth, const float frequency)
     fmDepth = depth;
     
     // Need to reset the oscilattor frequency every time the parameter changes not just when a new note is played
-    setFrequency(juce::MidiMessage::getMidiNoteInHertz(lastMidiNote) + fmModulation);
+    auto currentFrequency = juce::MidiMessage::getMidiNoteInHertz(lastMidiNote) + fmModulation;
+    setFrequency(currentFrequency >= 0 ? currentFrequency : currentFrequency * -1.0f);
 }

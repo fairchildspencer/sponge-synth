@@ -12,7 +12,7 @@
 #include "OscillatorUI.h"
 
 //==============================================================================
-OscillatorUI::OscillatorUI(juce::AudioProcessorValueTreeState& apvts, juce::String waveSelectID) {
+OscillatorUI::OscillatorUI(juce::AudioProcessorValueTreeState& apvts, juce::String waveSelectID, juce::String fmFreqID,             juce::String fmDepthID) {
     juce::StringArray waveChoices {"Sine", "Saw", "Square"};
     oscWaveSelector.addItemList(waveChoices, 1);
     addAndMakeVisible(oscWaveSelector);
@@ -22,11 +22,14 @@ OscillatorUI::OscillatorUI(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     
     using SliderClass = juce::AudioProcessorValueTreeState::SliderAttachment; //set the namespace for cleaner declarations
     
-    frequencyAttachment = std::make_unique<SliderClass>(apvts, "FMFREQUENCY", frequencySlider);
-    depthAttachment = std::make_unique<SliderClass>(apvts, "FMDEPTH", depthSlider);
+    frequencyAttachment = std::make_unique<SliderClass>(apvts, fmFreqID, frequencySlider);
+    depthAttachment = std::make_unique<SliderClass>(apvts, fmDepthID, depthSlider);
 
     initializeSlider(frequencySlider);
     initializeSlider(depthSlider);
+    
+    initializeLabel(frequencyLabel);
+    initializeLabel(depthLabel);
 }
 
 OscillatorUI::~OscillatorUI() {
@@ -37,21 +40,29 @@ void OscillatorUI::paint (juce::Graphics& g) {
 }
 
 void OscillatorUI::resized() {
-    oscWaveSelector.setBounds(0,0,98,20);
+    const auto sliderWidth = 100;
+    const auto sliderHeight = 90;
+    const auto labelHeight = 20;
+    const auto labelYOffset = 20;
+    const auto sliderY = 80;
     
-    const auto bounds = getLocalBounds().reduced(10);
-    const auto padding = 10;
-    const auto sliderHeight = bounds.getHeight() / 3;
-    const auto sliderWidth = bounds.getWidth() / 2 - padding;
+    oscWaveSelector.setBounds(0,0,100,20);
+    frequencySlider.setBounds(0, sliderY, sliderWidth, sliderHeight);
+    frequencyLabel.setBounds(frequencySlider.getX(), frequencySlider.getY() - labelYOffset, frequencySlider.getWidth(), labelHeight);
     
-    frequencySlider.setBounds(0, oscWaveSelector.getHeight() + padding, sliderWidth, sliderHeight);
-    depthSlider.setBounds(frequencySlider.getRight() + padding, oscWaveSelector.getHeight() + padding, sliderWidth, sliderHeight);
-
+    depthSlider.setBounds(frequencySlider.getRight(), sliderY, sliderWidth, sliderHeight);
+    depthLabel.setBounds(depthSlider.getX(), depthSlider.getY() - labelYOffset, depthSlider.getWidth(), labelHeight);
 }
 
 void OscillatorUI::initializeSlider(juce::Slider& slider) {
     slider.setSliderStyle(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag);
-    slider.setRotaryParameters(0, juce::MathConstants<float>::pi, true);
     slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
     addAndMakeVisible(slider);
+}
+
+void OscillatorUI::initializeLabel(juce::Label& label) {
+    label.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    label.setJustificationType(juce::Justification::centred);
+    label.setFont(15.0f);
+    addAndMakeVisible(label);
 }

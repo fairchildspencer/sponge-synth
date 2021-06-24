@@ -170,8 +170,8 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray {"Sine","Saw","Square"}, 0));
     
     //FM - Frequency and Depth of Wave
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMFREQUENCY", "FmFrequency", juce::NormalisableRange<float> { 0.0f, 1000.0f, }, 5.0f));
-    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMDEPTH", "FmDepth", juce::NormalisableRange<float> { 0.0f, 1000.0f, }, 500.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMFREQUENCY", "FmFrequency", juce::NormalisableRange<float> { 0.0f, 1000.0f, 0.01f, 0.3f }, 0.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("FMDEPTH", "FmDepth", juce::NormalisableRange<float> { 0.0f, 1000.0f, 0.01f, 0.3f }, 0.0f));
     
     //Attack -float
     params.push_back(std::make_unique<juce::AudioParameterFloat>("ATTACK", "Attack", juce::NormalisableRange<float> { 0.1f, 1.0f, }, 0.1f));
