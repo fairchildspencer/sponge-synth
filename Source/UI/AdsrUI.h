@@ -35,7 +35,15 @@ private:
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> sustainAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> releaseAttachment;
     
+    juce::Label attackLabel { "Attack", "A" };
+    juce::Label decayLabel { "Decay", "D" };
+    juce::Label sustainLabel { "Sustain", "S" };
+    juce::Label releaseLabel { "Release", "R" };
+    
     void initializeSlider(juce::Slider& slider);
+    void initializeLabel(juce::Label& label);
+    
+    juce::String componentName {"Envelope"};
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AdsrUI)
 };

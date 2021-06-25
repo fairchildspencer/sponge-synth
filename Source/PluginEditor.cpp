@@ -5,7 +5,7 @@
 //==============================================================================
 SpongeSynthAudioProcessorEditor::SpongeSynthAudioProcessorEditor (SpongeSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQUENCY", "FMDEPTH"), adsr(audioProcessor.apvts) {
-    setSize (400, 300);
+    setSize (620, 300);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
@@ -20,6 +20,9 @@ void SpongeSynthAudioProcessorEditor::paint (juce::Graphics& g) {
 }
 
 void SpongeSynthAudioProcessorEditor::resized() {
-    osc.setBounds(10, 10, 180, 200);
-    adsr.setBounds(getWidth() / 2, 0, getWidth() / 2, getHeight());
+    const auto paddingX = 5;
+    //const auto paddingY = 35;
+    
+    osc.setBounds (paddingX, 0, 300, 200);
+    adsr.setBounds (osc.getRight(), 0, 300, 200);
 }

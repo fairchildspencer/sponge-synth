@@ -30,28 +30,42 @@ OscillatorUI::OscillatorUI(juce::AudioProcessorValueTreeState& apvts, juce::Stri
     
     initializeLabel(frequencyLabel);
     initializeLabel(depthLabel);
+    
+    waveSelectorLabel.setColour (juce::Label::ColourIds::textColourId, juce::Colours::white);
+    waveSelectorLabel.setFont (15.0f);
+    waveSelectorLabel.setJustificationType (juce::Justification::left);
+    addAndMakeVisible (waveSelectorLabel);
 }
 
 OscillatorUI::~OscillatorUI() {
 }
 
 void OscillatorUI::paint (juce::Graphics& g) {
+    auto bounds = getLocalBounds().reduced (5);
+    auto labelSpace = bounds.removeFromTop (25.0f);
+    
     g.fillAll(juce::Colours::black);
+    g.setColour (juce::Colours::white);
+    g.setFont (20.0f);
+    g.drawText ("Oscillator", labelSpace.withX (5), juce::Justification::left);
+    g.drawRoundedRectangle (bounds.toFloat(), 5.0f, 2.0f);
 }
 
 void OscillatorUI::resized() {
+    const auto startY = 55;
     const auto sliderWidth = 100;
     const auto sliderHeight = 90;
-    const auto labelHeight = 20;
     const auto labelYOffset = 20;
-    const auto sliderY = 80;
-    
-    oscWaveSelector.setBounds(0,0,100,20);
-    frequencySlider.setBounds(0, sliderY, sliderWidth, sliderHeight);
-    frequencyLabel.setBounds(frequencySlider.getX(), frequencySlider.getY() - labelYOffset, frequencySlider.getWidth(), labelHeight);
-    
-    depthSlider.setBounds(frequencySlider.getRight(), sliderY, sliderWidth, sliderHeight);
-    depthLabel.setBounds(depthSlider.getX(), depthSlider.getY() - labelYOffset, depthSlider.getWidth(), labelHeight);
+    const auto labelHeight = 20;
+        
+    oscWaveSelector.setBounds (10, startY + 5, 90, 30);
+    waveSelectorLabel.setBounds (10, startY - labelYOffset, 90, labelHeight);
+        
+    frequencySlider.setBounds (oscWaveSelector.getRight(), startY, sliderWidth, sliderHeight);
+    frequencyLabel.setBounds (frequencySlider.getX(), frequencySlider.getY() - labelYOffset, frequencySlider.getWidth(), labelHeight);
+
+    depthSlider.setBounds (frequencySlider.getRight(), startY, sliderWidth, sliderHeight);
+    depthLabel.setBounds (depthSlider.getX(), depthSlider.getY() - labelYOffset, depthSlider.getWidth(), labelHeight);
 }
 
 void OscillatorUI::initializeSlider(juce::Slider& slider) {

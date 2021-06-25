@@ -33,6 +33,7 @@ private:
    
     juce::Label frequencyLabel { "FM Frequency", "FM Frequency" };
     juce::Label depthLabel { "FM Depth", "FM Depth" };
+    juce::Label waveSelectorLabel { "Wave Type", "Wave Type" };
     
     juce::ComboBox oscWaveSelector;
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> oscWaveAttachment;
