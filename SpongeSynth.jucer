@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="kmrnMO" name="SpongeSynth" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
+  <MAINGROUP id="oYLHHP" name="SpongeSynth">
+    <GROUP id="{6EA820A5-ADB5-7017-2271-212532763065}" name="Source">
+      <FILE id="LSsiFY" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="ggQQxN" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="Qfm0Bk" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="p0GQq8" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+      <FILE id="kGo2bu" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
+      <FILE id="g8tWJl" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
+      <FILE id="x3st3d" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+    </GROUP>
+    <GROUP id="{69F72B0C-1348-96B3-F0D2-194D65C0ADFB}" name="UI">
+      <FILE id="mKLexb" name="AdsrUI.cpp" compile="1" resource="0" file="Source/UI/AdsrUI.cpp"/>
+      <FILE id="xwxIPv" name="AdsrUI.h" compile="0" resource="0" file="Source/UI/AdsrUI.h"/>
+      <FILE id="P1gX18" name="OscillatorUI.cpp" compile="1" resource="0"
+            file="Source/UI/OscillatorUI.cpp"/>
+      <FILE id="R7NsZ9" name="OscillatorUI.h" compile="0" resource="0" file="Source/UI/OscillatorUI.h"/>
+    </GROUP>
+    <GROUP id="{1382F1D7-F382-451F-3AE7-875553E92891}" name="Back-end">
+      <FILE id="ti1ocU" name="AdsrProcessor.cpp" compile="1" resource="0"
+            file="Source/Back-end/AdsrProcessor.cpp"/>
+      <FILE id="VsVcSx" name="AdsrProcessor.h" compile="0" resource="0" file="Source/Back-end/AdsrProcessor.h"/>
+      <FILE id="LGtpbu" name="OscillatorProcessor.cpp" compile="1" resource="0"
+            file="Source/Back-end/OscillatorProcessor.cpp"/>
+      <FILE id="gwLeBD" name="OscillatorProcessor.h" compile="0" resource="0"
+            file="Source/Back-end/OscillatorProcessor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="SpongeSynth"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="SpongeSynth"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../../../JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../JUCE/modules"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <OSX/>
+  </LIVE_SETTINGS>
+</JUCERPROJECT>
