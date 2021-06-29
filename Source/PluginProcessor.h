@@ -4,6 +4,7 @@
 #include <JuceHeader.h>
 #include "SynthSound.h"
 #include "SynthVoice.h"
+#include "Back-end/FilterProcessor.h"
 
 //==============================================================================
 /**
@@ -52,7 +53,7 @@ public:
 
 private:
     juce::Synthesiser synth;
-    
+    FilterProcessor filter;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     
     //==============================================================================

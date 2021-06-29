@@ -24,6 +24,11 @@ AdsrUI::AdsrUI(juce::AudioProcessorValueTreeState& apvts) {
     initializeSlider(decaySlider);
     initializeSlider(sustainSlider);
     initializeSlider(releaseSlider);
+    
+    initializeLabel(attackLabel);
+    initializeLabel(decayLabel);
+    initializeLabel(sustainLabel);
+    initializeLabel(releaseLabel);
 }
 
 AdsrUI::~AdsrUI() {

@@ -82,6 +82,8 @@ void SpongeSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
+    
+    filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
 void SpongeSynthAudioProcessor::releaseResources() {
@@ -132,11 +134,18 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
             
             voice->getOscillator().setWaveType(oscWave);
             voice->getOscillator().setFMParams(fmDepth, fmFrequency);
-            voice->updateParameters(attack, decay, sustain, release); //Update params with current value tree state
+            voice->updateParameters(attack, decay, sustain, release); //Update parameters for each voice
         }
     }
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
+    
+    auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
+    auto& cutoffFreq = *apvts.getRawParameterValue("CUTOFF");
+    auto& resonance = *apvts.getRawParameterValue("RESONANCE");
+    
+    filter.updateParameters(filterType, cutoffFreq, resonance); //filter the audio (not filtering individual voices
+    filter.process(buffer);
 }
 
 //==============================================================================
@@ -181,6 +190,11 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     params.push_back(std::make_unique<juce::AudioParameterFloat>("SUSTAIN", "Sustain", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 1.0f));
     //Release -float
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RELEASE", "Release", juce::NormalisableRange<float> { 0.1f, 3.0f, 0.01f }, 0.4f));
+    
+    //State Variable Filter
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "FilterType", juce::StringArray {"Low-pass","Band-pass","High-pass"}, 0));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("CUTOFF", "Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("RESONANCE", "Resonance", juce::NormalisableRange<float> { 1.0f, 10.0f, 0.01f }, 1.0f));
     
     return {params.begin(), params.end()};
 }

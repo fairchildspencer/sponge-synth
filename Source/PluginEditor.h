@@ -5,6 +5,7 @@
 #include "PluginProcessor.h"
 #include "UI/AdsrUI.h"
 #include "UI/OscillatorUI.h"
+#include "UI/FilterUI.h"
 
 //==============================================================================
 /**
@@ -23,6 +24,7 @@ private:
     SpongeSynthAudioProcessor& audioProcessor;
     OscillatorUI osc;
     AdsrUI adsr;
+    FilterUI filter;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SpongeSynthAudioProcessorEditor)
 };

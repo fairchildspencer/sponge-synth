@@ -19,6 +19,8 @@
     <GROUP id="{69F72B0C-1348-96B3-F0D2-194D65C0ADFB}" name="UI">
       <FILE id="mKLexb" name="AdsrUI.cpp" compile="1" resource="0" file="Source/UI/AdsrUI.cpp"/>
       <FILE id="xwxIPv" name="AdsrUI.h" compile="0" resource="0" file="Source/UI/AdsrUI.h"/>
+      <FILE id="D9JS87" name="FilterUI.cpp" compile="1" resource="0" file="Source/UI/FilterUI.cpp"/>
+      <FILE id="lNzfkP" name="FilterUI.h" compile="0" resource="0" file="Source/UI/FilterUI.h"/>
       <FILE id="P1gX18" name="OscillatorUI.cpp" compile="1" resource="0"
             file="Source/UI/OscillatorUI.cpp"/>
       <FILE id="R7NsZ9" name="OscillatorUI.h" compile="0" resource="0" file="Source/UI/OscillatorUI.h"/>
@@ -27,6 +29,10 @@
       <FILE id="ti1ocU" name="AdsrProcessor.cpp" compile="1" resource="0"
             file="Source/Back-end/AdsrProcessor.cpp"/>
       <FILE id="VsVcSx" name="AdsrProcessor.h" compile="0" resource="0" file="Source/Back-end/AdsrProcessor.h"/>
+      <FILE id="RWiww7" name="FilterProcessor.cpp" compile="1" resource="0"
+            file="Source/Back-end/FilterProcessor.cpp"/>
+      <FILE id="IyGlKK" name="FilterProcessor.h" compile="0" resource="0"
+            file="Source/Back-end/FilterProcessor.h"/>
       <FILE id="LGtpbu" name="OscillatorProcessor.cpp" compile="1" resource="0"
             file="Source/Back-end/OscillatorProcessor.cpp"/>
       <FILE id="gwLeBD" name="OscillatorProcessor.h" compile="0" resource="0"
