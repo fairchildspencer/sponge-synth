@@ -16,7 +16,10 @@ SpongeSynthAudioProcessor::SpongeSynthAudioProcessor()
 #endif
 {
     synth.addSound(new SynthSound());
-    synth.addVoice(new SynthVoice());
+    
+    for (int i = 0; i < 3; i++) { //make it 3 voice polyphonic
+        synth.addVoice(new SynthVoice());
+    }
 }
 
 SpongeSynthAudioProcessor::~SpongeSynthAudioProcessor() {
