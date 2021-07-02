@@ -13,7 +13,7 @@
 
 //==============================================================================
 OscillatorUI::OscillatorUI(juce::AudioProcessorValueTreeState& apvts, juce::String waveSelectID, juce::String fmFreqID,             juce::String fmDepthID) {
-    juce::StringArray waveChoices {"Sine", "Saw", "Square"};
+    juce::StringArray waveChoices {"Sine", "Saw", "Square", "Triangle"};
     oscWaveSelector.addItemList(waveChoices, 1);
     addAndMakeVisible(oscWaveSelector);
     

@@ -4,7 +4,7 @@
 
 //==============================================================================
 SpongeSynthAudioProcessorEditor::SpongeSynthAudioProcessorEditor (SpongeSynthAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQUENCY", "FMDEPTH"), adsr(audioProcessor.apvts), filter(audioProcessor.apvts, "FILTERTYPE", "CUTOFF", "RESONANCE") {
+    : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQUENCY", "FMDEPTH"), adsr(audioProcessor.apvts), filter(audioProcessor.apvts, "FILTERTYPE", "CUTOFF", "RESONANCE", "ONOFF") {
     setSize (620, 500);
 
     addAndMakeVisible(osc);

@@ -15,8 +15,8 @@ SpongeSynthAudioProcessor::SpongeSynthAudioProcessor()
                        ), apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
+    synth.setNoteStealingEnabled(true);
     synth.addSound(new SynthSound());
-    
     for (int i = 0; i < 3; i++) { //make it 3 voice polyphonic
         synth.addVoice(new SynthVoice());
     }
@@ -143,12 +143,15 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
 
     synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     
-    auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
-    auto& cutoffFreq = *apvts.getRawParameterValue("CUTOFF");
-    auto& resonance = *apvts.getRawParameterValue("RESONANCE");
-    
-    filter.updateParameters(filterType, cutoffFreq, resonance); //filter the audio (not filtering individual voices
-    filter.process(buffer);
+    auto& filterOnOff = *apvts.getRawParameterValue("ONOFF");
+    if (filterOnOff) {
+        auto& filterType = *apvts.getRawParameterValue("FILTERTYPE");
+        auto& cutoffFreq = *apvts.getRawParameterValue("CUTOFF");
+        auto& resonance = *apvts.getRawParameterValue("RESONANCE");
+        
+        filter.updateParameters(filterType, cutoffFreq, resonance); //filter the audio (not filtering individual voices
+        filter.process(buffer);
+    }
 }
 
 //==============================================================================
@@ -179,7 +182,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
     
     //ComboBox -Switch Oscillators
-    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray {"Sine","Saw","Square"}, 0));
+    params.push_back(std::make_unique<juce::AudioParameterChoice>("OSC", "Oscillator", juce::StringArray {"Sine","Saw","Square", "Triangle"}, 0));
     
     //FM - Frequency and Depth of Wave
     params.push_back(std::make_unique<juce::AudioParameterFloat>("FMFREQUENCY", "FmFrequency", juce::NormalisableRange<float> { 0.0f, 1000.0f, 0.01f, 0.3f }, 0.0f));
@@ -198,6 +201,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     params.push_back(std::make_unique<juce::AudioParameterChoice>("FILTERTYPE", "FilterType", juce::StringArray {"Low-pass","Band-pass","High-pass"}, 0));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CUTOFF", "Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RESONANCE", "Resonance", juce::NormalisableRange<float> { 1.0f, 10.0f, 0.01f }, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterBool>("ONOFF", "OnOff", 0));
     
     return {params.begin(), params.end()};
 }

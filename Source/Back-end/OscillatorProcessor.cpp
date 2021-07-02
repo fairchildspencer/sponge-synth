@@ -21,6 +21,8 @@ void OscillatorProcessor::setWaveType(const int waveType) {
         case 2:
             initialise([](float x) { return x < 0.0f ? -1.0f : 1.0f; }); //square wave
             break;
+        case 3:
+            initialise([](float x) { return std::abs(x) - 1.0f; }); //triangle wave
         default:
             jassertfalse;
             break;

@@ -12,7 +12,7 @@
 #include "FilterUI.h"
 
 //==============================================================================
-FilterUI::FilterUI(juce::AudioProcessorValueTreeState& apvts, juce::String filterSelectID, juce::String cutoffID,             juce::String resonanceID) {
+FilterUI::FilterUI(juce::AudioProcessorValueTreeState& apvts, juce::String filterSelectID, juce::String cutoffID,             juce::String resonanceID, juce::String onOffID) {
     juce::StringArray filterTypeChoices {"Low-pass", "Band-pass", "High-pass"};
     filterType.addItemList(filterTypeChoices, 1);
     addAndMakeVisible(filterType);
@@ -35,6 +35,13 @@ FilterUI::FilterUI(juce::AudioProcessorValueTreeState& apvts, juce::String filte
     filterTypeLabel.setFont (15.0f);
     filterTypeLabel.setJustificationType (juce::Justification::left);
     addAndMakeVisible (filterTypeLabel);
+    
+    onOffAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(apvts, onOffID, onOffButton);
+    onOffButton.setColour(juce::Label::ColourIds::textColourId, juce::Colours::white);
+    onOffLabel.setColour (juce::Label::ColourIds::textColourId, juce::Colours::white);
+    onOffLabel.setFont (15.0f);
+    addAndMakeVisible(onOffLabel);
+    addAndMakeVisible(onOffButton);
 }
 
 FilterUI::~FilterUI() {
@@ -57,9 +64,12 @@ void FilterUI::resized() {
     const auto sliderHeight = 90;
     const auto labelYOffset = 20;
     const auto labelHeight = 20;
+    
+    onOffButton.setBounds(10, startY - 5, 20, 20);
+    onOffLabel.setBounds(onOffButton.getRight() + 5, startY - 5, 60, labelHeight);
         
-    filterType.setBounds (10, startY + 5, 90, 30);
-    filterTypeLabel.setBounds (10, startY - labelYOffset, 90, labelHeight);
+    filterTypeLabel.setBounds (10, onOffButton.getBottom() + 14, 90, labelHeight);
+    filterType.setBounds (10, filterTypeLabel.getBottom() + 5, 90, 30);
         
     cutoffSlider.setBounds (filterType.getRight(), startY, sliderWidth, sliderHeight);
     cutoffLabel.setBounds (cutoffSlider.getX(), cutoffSlider.getY() - labelYOffset, cutoffSlider.getWidth(), labelHeight);
