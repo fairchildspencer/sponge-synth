@@ -43,7 +43,7 @@ private:
     void initializeSlider(juce::Slider& slider);
     void initializeLabel(juce::Label& label);
     
-    juce::String componentName {"Envelope"};
+    juce::String componentName {"Amp Envelope"};
     
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (AdsrUI)
 };

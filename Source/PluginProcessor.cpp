@@ -87,6 +87,7 @@ void SpongeSynthAudioProcessor::prepareToPlay (double sampleRate, int samplesPer
     }
     
     filter.prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
+    reverb.prepare(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
 }
 
 void SpongeSynthAudioProcessor::releaseResources() {
@@ -123,7 +124,6 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
     
     for (int i = 0; i < synth.getNumVoices(); i++) {
         if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
-            //lfo
             
             auto& attack = *apvts.getRawParameterValue("ATTACK");
             auto& decay = *apvts.getRawParameterValue("DECAY");
@@ -152,6 +152,9 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         filter.updateParameters(filterType, cutoffFreq, resonance); //filter the audio (not filtering individual voices
         filter.process(buffer);
     }
+    
+    reverb.updateParams(0.9f, 0.5f, 0.5f, 0.5f, 1.0f);
+    reverb.process(buffer);
 }
 
 //==============================================================================

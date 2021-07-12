@@ -24,6 +24,8 @@
       <FILE id="P1gX18" name="OscillatorUI.cpp" compile="1" resource="0"
             file="Source/UI/OscillatorUI.cpp"/>
       <FILE id="R7NsZ9" name="OscillatorUI.h" compile="0" resource="0" file="Source/UI/OscillatorUI.h"/>
+      <FILE id="lH1vmq" name="ReverbUI.cpp" compile="1" resource="0" file="Source/UI/ReverbUI.cpp"/>
+      <FILE id="BpVCDw" name="ReverbUI.h" compile="0" resource="0" file="Source/UI/ReverbUI.h"/>
     </GROUP>
     <GROUP id="{1382F1D7-F382-451F-3AE7-875553E92891}" name="Back-end">
       <FILE id="ti1ocU" name="AdsrProcessor.cpp" compile="1" resource="0"
@@ -37,6 +39,10 @@
             file="Source/Back-end/OscillatorProcessor.cpp"/>
       <FILE id="gwLeBD" name="OscillatorProcessor.h" compile="0" resource="0"
             file="Source/Back-end/OscillatorProcessor.h"/>
+      <FILE id="rt1vf1" name="ReverbProcessor.cpp" compile="1" resource="0"
+            file="Source/Back-end/ReverbProcessor.cpp"/>
+      <FILE id="OsxSXv" name="ReverbProcessor.h" compile="0" resource="1"
+            file="Source/Back-end/ReverbProcessor.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>

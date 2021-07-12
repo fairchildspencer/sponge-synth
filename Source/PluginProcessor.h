@@ -5,6 +5,7 @@
 #include "SynthSound.h"
 #include "SynthVoice.h"
 #include "Back-end/FilterProcessor.h"
+#include "Back-end/ReverbProcessor.h"
 
 //==============================================================================
 /**
@@ -54,6 +55,7 @@ public:
 private:
     juce::Synthesiser synth;
     FilterProcessor filter;
+    ReverbProcessor reverb;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
     
     //==============================================================================
