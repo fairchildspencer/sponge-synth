@@ -6,6 +6,7 @@
 #include "UI/AdsrUI.h"
 #include "UI/OscillatorUI.h"
 #include "UI/FilterUI.h"
+#include "UI/ReverbUI.h"
 
 //==============================================================================
 /**
@@ -25,6 +26,7 @@ private:
     OscillatorUI osc;
     AdsrUI adsr;
     FilterUI filter;
+    ReverbUI reverb;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SpongeSynthAudioProcessorEditor)
 };

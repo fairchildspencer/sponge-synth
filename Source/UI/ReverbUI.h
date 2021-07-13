@@ -33,6 +33,12 @@ private:
     juce::Slider dampingSlider;
     juce::Slider widthSlider;
     
+    juce::Label roomSizeLabel { "Size", "Size" };
+    juce::Label dryLevelLabel { "Dry", "Dry" };
+    juce::Label wetLevelLabel { "Wet", "Wet" };
+    juce::Label dampingLabel { "Damping", "Damping" };
+    juce::Label widthLabel { "Width", "Width" };
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> roomSizeAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> dryLevelAttachment;
     std::unique_ptr<juce::AudioProcessorValueTreeState::SliderAttachment> wetLevelAttachment;

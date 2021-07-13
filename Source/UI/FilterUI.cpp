@@ -13,6 +13,7 @@
 
 //==============================================================================
 FilterUI::FilterUI(juce::AudioProcessorValueTreeState& apvts, juce::String filterSelectID, juce::String cutoffID,             juce::String resonanceID, juce::String onOffID) {
+    
     juce::StringArray filterTypeChoices {"Low-pass", "Band-pass", "High-pass"};
     filterType.addItemList(filterTypeChoices, 1);
     addAndMakeVisible(filterType);

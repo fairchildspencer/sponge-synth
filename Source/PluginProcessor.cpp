@@ -153,7 +153,13 @@ void SpongeSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, 
         filter.process(buffer);
     }
     
-    reverb.updateParams(0.9f, 0.5f, 0.5f, 0.5f, 1.0f);
+    auto& roomSize = *apvts.getRawParameterValue("ROOMSIZE");
+    auto& dryMix = *apvts.getRawParameterValue("DRY");
+    auto& wetMix = *apvts.getRawParameterValue("WET");
+    auto& damping = *apvts.getRawParameterValue("DAMPING");
+    auto& width = *apvts.getRawParameterValue("WIDTH");
+    
+    reverb.updateParams(roomSize, dryMix, wetMix, damping, width);
     reverb.process(buffer);
 }
 
@@ -205,6 +211,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout SpongeSynthAudioProcessor::c
     params.push_back(std::make_unique<juce::AudioParameterFloat>("CUTOFF", "Cutoff", juce::NormalisableRange<float> { 20.0f, 20000.0f, 0.01f, 0.6f }, 200.0f));
     params.push_back(std::make_unique<juce::AudioParameterFloat>("RESONANCE", "Resonance", juce::NormalisableRange<float> { 1.0f, 10.0f, 0.01f }, 1.0f));
     params.push_back(std::make_unique<juce::AudioParameterBool>("ONOFF", "OnOff", 0));
+    
+    //Reverb
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("ROOMSIZE", "Room Size", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DRY", "Wet", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("WET", "Wet", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("DAMPING", "Damping", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>("WIDTH", "Width", juce::NormalisableRange<float> { 0.1f, 1.0f, 0.01f }, 0.1f));
     
     return {params.begin(), params.end()};
 }
