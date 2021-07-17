@@ -6,7 +6,7 @@
 SpongeSynthAudioProcessorEditor::SpongeSynthAudioProcessorEditor (SpongeSynthAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p), osc(audioProcessor.apvts, "OSC", "FMFREQUENCY", "FMDEPTH"), adsr(audioProcessor.apvts), filter(audioProcessor.apvts, "FILTERTYPE", "CUTOFF", "RESONANCE", "ONOFF"), reverb(audioProcessor.apvts, "ROOMSIZE", "DRY", "WET", "DAMPING", "WIDTH") {
     
-    setSize (620, 450);
+    setSize (670, 450);
 
     addAndMakeVisible(osc);
     addAndMakeVisible(adsr);
@@ -23,11 +23,11 @@ void SpongeSynthAudioProcessorEditor::paint (juce::Graphics& g) {
 }
 
 void SpongeSynthAudioProcessorEditor::resized() {
-    const auto paddingX = 5;
+    const auto paddingX = 10;
     const auto paddingY = 10;
     
     osc.setBounds (paddingX, paddingY, 300, 200);
-    adsr.setBounds (osc.getRight(), paddingY, 300, 200);
+    adsr.setBounds (osc.getRight(), paddingY, 340, 200);
     filter.setBounds (paddingX, osc.getBottom() + paddingY, 300, 200);
-    reverb.setBounds(filter.getRight(), adsr.getBottom() + paddingY, 300, 200);
+    reverb.setBounds(filter.getRight(), adsr.getBottom() + paddingY, 340, 200);
 }

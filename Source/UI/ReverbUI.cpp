@@ -52,7 +52,7 @@ void ReverbUI::paint (juce::Graphics& g) {
 void ReverbUI::resized() {
     const auto bounds = getLocalBounds().reduced (10);
     const auto padding = 10;
-    const auto sliderWidth = bounds.getWidth() / 4 - padding;
+    const auto sliderWidth = bounds.getWidth() / 5 - padding;
     const auto sliderHeight = bounds.getHeight() - 45;
     const auto sliderStartX = padding + 5;
     const auto sliderStartY = 55;
@@ -79,7 +79,7 @@ void ReverbUI::resized() {
 
 void ReverbUI::initializeSlider(juce::Slider& slider) {
     slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     addAndMakeVisible(slider);
 }
 

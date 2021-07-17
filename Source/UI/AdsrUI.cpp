@@ -71,7 +71,7 @@ void AdsrUI::resized() {
 
 void AdsrUI::initializeSlider(juce::Slider& slider) {
     slider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
-    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
+    slider.setTextBoxStyle(juce::Slider::NoTextBox, true, 0, 0);
     addAndMakeVisible(slider);
 }
 
